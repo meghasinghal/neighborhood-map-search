@@ -132,6 +132,8 @@ myApp.controller('restaurantController', function ($routeParams, $location, $sco
                     fareData.distance = shortest.distance + " Miles";
                     $scope.displayInfoWindow(index, fareData);
                 }
+            }, function (error) {
+                $scope.displayInfoWindow(index, null);
             });
 
             $scope.displayInfoWindow = function (index, fareData) {

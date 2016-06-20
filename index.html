@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Neighbourhood Map</title>
@@ -17,16 +17,25 @@
     <link rel="stylesheet" href="css/styles.css">
 
 </head>
-<body ng-app="myApp" style="background-color: black" ng-init="init()" ng-controller="homeController">
-<div class="container homePage">
-    <div class="jumbotron">
-        <h1>Neighbourhood Map</h1>
-        <p>
-        <form>
-            <input ng-model="inputAddress" type="text" name="search" id="search" placeholder="Enter City Name" required>
-            <button ng-click="goTo()" type="submit" class="btn btn-primary btn-lg">Search City</button>
-        </form>
-        </p>
+<body ng-app="myApp" ng-init="init()" ng-controller="homeController">
+<div class="container-fluid  homePage">
+    <div class="container-fluid">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="navbar-header">
+                <a target="_blank" class="navbar-brand">Neighbourhood Map</a>
+            </div>
+            <div class="container" id="search-panel">
+                <ul class="nav navbar-nav navbar-right">
+                    <p>
+                    <form>
+                        <input ng-model="inputAddress" type="text" name="search" id="search" placeholder="Enter City Name"
+                               required>
+                        <button ng-click="goTo()" type="submit" class="btn btn-primary btn-sm">Search City</button>
+                    </form>
+                    </p>
+                </ul>
+            </div>
+        </nav>
     </div>
     <div class="row popularMaps">
         <div class="mapTitle">Popular Maps</div>
@@ -66,10 +75,8 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
+<div class="container-fluid">
         <div ng-view></div>
-    </div>
 </div><!-- /.container -->
 </body>
 </html>

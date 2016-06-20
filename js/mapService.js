@@ -20,11 +20,13 @@ myApp.factory('mapService', function ($http, $q, $rootScope, $location) {
     };
 
     mapFactory.displayMap = function (coordinates) {
-        var mapProp = {
+        $('#googleMap').css('height', window.innerHeight + 'px');
+        return new google.maps.Map(document.getElementById('googleMap'), {
             center: new google.maps.LatLng(coordinates[0], coordinates[1]),
-            zoom: 15
-        };
-        return new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            zoom: 13,
+            disableDefaultUI: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
     };
 
     mapFactory.setMarker = function (coordinates, map) {
@@ -69,5 +71,19 @@ myApp.factory('mapService', function ($http, $q, $rootScope, $location) {
         });
         return deferred.promise;
     };
+
+    mapFactory.getRestaurants = function (address) {
+            return new Promise(function (resolve, reject) {
+                var url = 'http://api.locu.com/v1_0/venue/search/?locality='  + address + '&category=restaurant&api_key=b827df72109febb7e8fd45f4ce3baaac2861f692';
+                $.ajax({
+                    url: url, type: "GET", dataType: 'jsonp', jsonp: 'callback'
+                }).done(function (data) {
+                    return resolve(data);
+                }).fail(function (jqXHR, textStatus) {
+                    return reject(textStatus);
+                });
+            });
+        };
+
     return mapFactory;
 });
